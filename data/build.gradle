@@ -56,7 +56,8 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$versions.coroutinesCoreVersion"
 
 
-    testImplementation 'junit:junit:4.+'
+    testImplementation "junit:junit:$versions.junitVersion"
+    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:$versions.mockitoVersion"
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 }

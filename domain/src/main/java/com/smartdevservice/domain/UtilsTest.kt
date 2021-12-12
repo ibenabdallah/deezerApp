@@ -7,8 +7,8 @@ import com.smartdevservice.domain.model.Artist
 object UtilsTest {
 
     const val FAKE_FAILURE_ERROR_CODE = 400
-    const val THROWABLE_MSG = "Response.error()"
-    val httpError = HttpError(Throwable(THROWABLE_MSG), FAKE_FAILURE_ERROR_CODE)
+    const val FAKE_FAILURE_ERROR_MSG = "Response.error()"
+    val fakeErrorFailure = HttpError(Throwable(FAKE_FAILURE_ERROR_MSG), FAKE_FAILURE_ERROR_CODE)
 
 
     val artist = Artist(123, "", "", "", "", "", "", "", "")

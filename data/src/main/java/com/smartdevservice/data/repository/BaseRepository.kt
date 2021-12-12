@@ -9,7 +9,9 @@ import kotlinx.coroutines.withContext
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-const val NETWORK_ERROR = "Has Not Network Access"
+const val NETWORK_ERROR_MSG = "Has Not Network Access"
+const val NETWORK_ERROR_CODE = 555
+val errorNoNetwork = HttpError(Throwable(NETWORK_ERROR_MSG), NETWORK_ERROR_CODE)
 
 open class BaseRepository(val connectivity: Connectivity) : KoinComponent {
 
@@ -24,7 +26,7 @@ open class BaseRepository(val connectivity: Connectivity) : KoinComponent {
                 apiDataProvider()
             }
         } else {
-            Failure(HttpError(Throwable(NETWORK_ERROR)))
+            Failure(errorNoNetwork)
         }
     }
 }
