@@ -6,22 +6,102 @@
     android:layout_height="match_parent"
     tools:context=".ui.details.DetailsAlbumFragment">
 
-    <TextView
-        android:id="@+id/textview_second"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/button_second"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <ImageView
+        android:id="@+id/iv_cover"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/album_cover" />
 
-    <Button
-        android:id="@+id/button_second"
+    <TextView
+        android:id="@+id/tv_title_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/previous"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="@dimen/margin_15"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textview_second" />
+        app:layout_constraintTop_toBottomOf="@id/iv_cover"
+        android:text="@string/album_titre" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_15"
+        app:layout_constraintStart_toEndOf="@id/tv_title_label"
+        app:layout_constraintTop_toBottomOf="@id/iv_cover"
+        tools:text="Franky Knight" />
+
+    <TextView
+        android:id="@+id/tv_realise_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_15"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_title"
+        android:text="@string/album_date_realisation" />
+
+    <TextView
+        android:id="@+id/tv_realise"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_15"
+        app:layout_constraintStart_toEndOf="@id/tv_realise_label"
+        app:layout_constraintTop_toBottomOf="@id/tv_title"
+        tools:text="2011-01-01" />
+
+    <TextView
+        android:id="@+id/tv_artist_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_15"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_realise_label"
+        android:text="@string/album_artist" />
+
+    <TextView
+        android:id="@+id/tv_artist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_15"
+        app:layout_constraintStart_toEndOf="@id/tv_artist_label"
+        app:layout_constraintTop_toBottomOf="@id/tv_realise_label"
+        tools:text="Émilie Simon" />
+
+    <TextView
+        android:id="@+id/tv_available_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_15"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_artist_label"
+        android:text="@string/album_available" />
+
+    <TextView
+        android:id="@+id/tv_available"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_15"
+        app:layout_constraintStart_toEndOf="@id/tv_available_label"
+        app:layout_constraintTop_toBottomOf="@id/tv_artist_label"
+        tools:text="Oui" />
+
+    <TextView
+        android:id="@+id/tv_tracks_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_15"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_available_label"
+        android:text="@string/album_nb_tracks" />
+
+    <TextView
+        android:id="@+id/tv_tracks"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_15"
+        app:layout_constraintStart_toEndOf="@id/tv_tracks_label"
+        app:layout_constraintTop_toBottomOf="@id/tv_available_label"
+        tools:text="10" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
