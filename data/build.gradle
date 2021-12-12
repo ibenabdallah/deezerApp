@@ -1,0 +1,62 @@
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+}
+
+apply from: '../dependencies.gradle'
+
+android {
+    compileSdk versions.compileSdk
+
+    defaultConfig {
+        minSdk versions.minSdk
+        targetSdk versions.targetSdk
+        versionCode versions.versionCode
+        versionName versions.versionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+
+    implementation project(path: ':domain')
+    
+    // networking retrofit2
+    implementation "com.squareup.retrofit2:retrofit:$versions.retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$versions.retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-scalars:$versions.retrofitVersion"
+
+    // networking okhttp3 en BOM
+    implementation platform ("com.squareup.okhttp3:okhttp-bom:$versions.okhttpBomVersion")
+    // artefacts OkHttp requis
+    implementation "com.squareup.okhttp3:okhttp"
+    implementation "com.squareup.okhttp3:logging-interceptor"
+    implementation "com.squareup.okhttp3:okhttp-urlconnection"
+
+    //di
+    implementation "io.insert-koin:koin-android:$versions.koinVersion"
+
+    //coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$versions.coroutinesCoreVersion"
+
+
+    testImplementation 'junit:junit:4.+'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+}
