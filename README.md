@@ -57,16 +57,16 @@ Glide       : https://bumptech.github.io/glide/
 
 
 
-### Quelques screenshots 
+# Quelques screenshots 
 
-<p float="center">
+<p>
 <img src="/screenshots/screenshot_list_album.jpg" width="40%">
 <img src="/screenshots/screenshot_details_album.jpg" width="40%">
 </p>
 
 
 
-#### The MIT License
+# The MIT License
 
 #### Copyright (c) 2021 BENABDALLAH Ismail, https://www.linkedin.com/in/baismail
 
