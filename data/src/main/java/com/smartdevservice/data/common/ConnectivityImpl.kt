@@ -3,43 +3,54 @@ package com.smartdevservice.data.common
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
+import android.net.NetworkInfo
 import android.os.Build
 
-class ConnectivityImpl(private val context: Context) : Connectivity {
+class ConnectivityImpl(context: Context) : Connectivity {
 
-    private val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+    private val connectivityManager =
+        context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
     override fun hasNetworkAccess(): Boolean {
         return isWifi() || isMobile()
     }
 
     override fun isWifi(): Boolean {
-        connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)?.run {
-            return hasTransport(NetworkCapabilities.TRANSPORT_WIFI)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)?.run {
+                    return hasTransport(NetworkCapabilities.TRANSPORT_WIFI)
+                }
+            } else {
+                connectivityManager.activeNetworkInfo?.run {
+                    return type == ConnectivityManager.TYPE_WIFI
+                }
+            }
+        } else {
+            val activeNetwork: NetworkInfo? = connectivityManager.activeNetworkInfo
+            return activeNetwork?.isConnected == true && activeNetwork.type == ConnectivityManager.TYPE_WIFI
         }
         return false
     }
 
     override fun isMobile(): Boolean {
-        connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)?.run {
-            return hasTransport(
-                NetworkCapabilities.TRANSPORT_CELLULAR
-            )
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)?.run {
+                    return hasTransport(
+                        NetworkCapabilities.TRANSPORT_CELLULAR
+                    )
+                }
+            } else {
+                connectivityManager.activeNetworkInfo?.run {
+                    return type == ConnectivityManager.TYPE_MOBILE
+                }
+            }
+        } else {
+            val activeNetwork: NetworkInfo? = connectivityManager.activeNetworkInfo
+            return activeNetwork?.isConnected == true && activeNetwork.type == ConnectivityManager.TYPE_MOBILE
         }
         return false
     }
 
-    override fun getConnectionType(): Int {
-        return when {
-            isMobile() -> {
-                Connectivity.MOBILE
-            }
-            isWifi() -> {
-                Connectivity.WIFI
-            }
-            else -> {
-                Connectivity.NONE
-            }
-        }
-    }
 }

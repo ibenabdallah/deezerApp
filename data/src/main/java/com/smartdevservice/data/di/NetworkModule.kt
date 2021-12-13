@@ -10,7 +10,6 @@ import org.koin.android.BuildConfig
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.converter.scalars.ScalarsConverterFactory
 
 private const val BASE_URL = "https://api.deezer.com/2.0/user/2529/"
 
@@ -37,7 +36,6 @@ val networkingModule = module {
         Retrofit.Builder()
             .baseUrl(BASE_URL)
             .client(get())
-            //.addConverterFactory(get() as ScalarsConverterFactory)
             .addConverterFactory(get() as GsonConverterFactory)
             .build()
     }

@@ -4,10 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.navineo.ordiphone.ui.dialog.MyDialogHelper
 import com.smartdevservice.deezerapp.R
 import com.smartdevservice.deezerapp.base.*
 import com.smartdevservice.deezerapp.common.subscribe
@@ -37,11 +35,11 @@ class ListAlbumFragment : BaseFragment() {
 
         albumViewModel.viewState.subscribe(this, ::handleAllAlbumState)
 
-        val enumDensity = Utils.getEnumDensityOfDevice(binding.root.context)
+        val enumDensity = Utils.getEnumDensityOfDevice(requireContext())
 
         albumAdapter = AlbumAdapter(arrayListOf(), enumDensity, object : ListListener {
             override fun onClickItem(album: Album) {
-                findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment, Bundle().apply {
+                findNavController().navigate(R.id.action_ListAlbumFragment_to_DetailsAlbumFragment, Bundle().apply {
                     putParcelable(KEY_ALBUM, album)
                 })
             }
@@ -80,7 +78,7 @@ class ListAlbumFragment : BaseFragment() {
             is SuccessState -> {
                 Timber.i("SuccessState")
                 Timber.i("data = ${state.data}")
-                albumAdapter.list = state.data?.toList() ?: arrayListOf()
+                albumAdapter.setList(state.data?.toList() ?: arrayListOf())
             }
         }
     }

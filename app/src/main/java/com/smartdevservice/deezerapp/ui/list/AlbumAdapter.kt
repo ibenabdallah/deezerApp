@@ -12,7 +12,7 @@ import com.smartdevservice.deezerapp.ui.ListListener
 import com.smartdevservice.deezerapp.utils.EnumDensity
 import com.smartdevservice.domain.model.Album
 
-class AlbumAdapter(var list: List<Album>, val enumDensity: EnumDensity, private val listener: ListListener) : RecyclerView.Adapter<AlbumAdapter.MyViewHolder>() {
+class AlbumAdapter(private var list: List<Album>, val enumDensity: EnumDensity, private val listener: ListListener) : RecyclerView.Adapter<AlbumAdapter.MyViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val binding = ItemAlbumBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -25,6 +25,11 @@ class AlbumAdapter(var list: List<Album>, val enumDensity: EnumDensity, private 
         holder.binding.root.onClick {
             listener.onClickItem(item)
         }
+    }
+
+    fun setList(list: List<Album>){
+        this.list = list
+        notifyDataSetChanged()
     }
 
     inner class MyViewHolder(val binding: ItemAlbumBinding) : RecyclerView.ViewHolder(binding.root) {
@@ -46,11 +51,10 @@ class AlbumAdapter(var list: List<Album>, val enumDensity: EnumDensity, private 
                 EnumDensity.DENSITY_XXHDPI -> album.cover_big
                 EnumDensity.DENSITY_XXXHDPI -> album.cover_xl
             }
-
         }
     }
 
     override fun getItemCount(): Int {
-        return list?.size ?: 0
+        return list.size
     }
 }

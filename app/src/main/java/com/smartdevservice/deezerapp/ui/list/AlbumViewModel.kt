@@ -8,8 +8,8 @@ import com.smartdevservice.domain.onSuccess
 import com.smartdevservice.domain.usecase.AllAlbumUseCase
 
 class AlbumViewModel(
-    private val allAlbumUseCase: AllAlbumUseCase,
-    private val connectivity: Connectivity
+    connectivity: Connectivity,
+    private val allAlbumUseCase: AllAlbumUseCase
 ) : BaseViewModel<ArrayList<Album>>(connectivity) {
 
     fun loadingAllAlbum() = executeUseCase(

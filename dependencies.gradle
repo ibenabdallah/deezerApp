@@ -29,5 +29,11 @@ ext.versions = [
         timberVersion          : '4.7.1',
 
 
+        //test
+        junitVersion           : '4.13.2',
+        mockitoVersion         : '2.1.0',
+        coroutinesTestVersion  : '1.4.2',
+        koinTestVersion        : '2.2.2',
+        coreTestVersion        : '2.1.0',
 
 ]
