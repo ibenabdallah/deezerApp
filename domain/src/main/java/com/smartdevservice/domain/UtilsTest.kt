@@ -8,10 +8,8 @@ object UtilsTest {
 
     const val FAKE_FAILURE_ERROR_CODE = 400
     const val FAKE_FAILURE_ERROR_MSG = "Response.error()"
-    val fakeErrorFailure = HttpError(Throwable(FAKE_FAILURE_ERROR_MSG), FAKE_FAILURE_ERROR_CODE)
 
-
-    val artist = Artist(123, "", "", "", "", "", "", "", "")
+    private val artist = Artist(123, "", "", "", "", "", "", "", "")
     val album = Album(1, "","","","","", "", "", "", 10,
         "", "", true,"", true, 1587418247, artist, "")
     val successAllAlbumResponse = AllAlbumResponse(arrayListOf(album))
