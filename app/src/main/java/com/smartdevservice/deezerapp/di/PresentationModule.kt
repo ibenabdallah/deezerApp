@@ -6,6 +6,6 @@ import org.koin.dsl.module
 
 val presentationModule = module {
 
-    viewModel { AlbumViewModel(get(), get()) }
+    viewModel { AlbumViewModel(get()) }
 
 }

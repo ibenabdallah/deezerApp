@@ -8,10 +8,12 @@ import com.smartdevservice.domain.model.AllAlbumResponse
 
 import com.smartdevservice.domain.repository.AlbumRepository
 
-class AlbumRepositoryImpl(private val deezerApi: DeezerApi, connectivity: Connectivity) : BaseRepository(connectivity), AlbumRepository {
+class AlbumRepositoryImpl(private val deezerApi: DeezerApi) : BaseRepository(), AlbumRepository {
+
     override suspend fun loadingAllAlbum(): Result<AllAlbumResponse> {
         return fetchData {
             deezerApi.loadingAllAlbums().getData()
         }
     }
+
 }

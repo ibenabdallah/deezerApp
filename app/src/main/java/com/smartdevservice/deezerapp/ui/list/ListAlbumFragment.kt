@@ -72,12 +72,19 @@ class ListAlbumFragment : BaseFragment() {
     private fun handleAllAlbumState(state: ViewState<ArrayList<Album>>) {
         binding.srlList.isRefreshing = state is LoadingState
         when (state) {
-            is FailureState -> Timber.i("FailureState")
+            is FailureState -> {
+                Timber.i("FailureState")
+                //TODO on peut ajouter un traitement pour dit à l'utilisateur qu'il y'a un probeleme
+                // Comme affichage d'une Toast ou Snackbar par exemple...
+            }
             is LoadingState -> Timber.i("LoadingState")
-            is NoInternetState -> Timber.i("NoInternetState")
+            is NoNetworkState -> {
+                Timber.i("NoNetworkState")
+                //TODO on peut ajouter un traitement pour dit à l'utilisateur qu'il n'a pas de connexion
+                // Comme affichage d'une Toast ou Snackbar par exemple...
+            }
             is SuccessState -> {
-                Timber.i("SuccessState")
-                Timber.i("data = ${state.data}")
+                Timber.i("SuccessState, data size = ${state.data?.size}")
                 albumAdapter.setList(state.data?.toList() ?: arrayListOf())
             }
         }

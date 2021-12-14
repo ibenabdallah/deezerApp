@@ -58,7 +58,7 @@ class AlbumViewModelTest : BaseViewModelTest() {
 
             verify(allAlbumObserver).onChanged(LoadingState())
             verify(allAlbumObserver).onChanged(SuccessState(successAllAlbumResponse.data))
-            verify(allAlbumObserver, never()).onChanged(NoInternetState())
+            verify(allAlbumObserver, never()).onChanged(NoNetworkState())
             verify(allAlbumObserver, never()).onChanged(FailureState(throwable))
         }
     }
@@ -79,7 +79,7 @@ class AlbumViewModelTest : BaseViewModelTest() {
             verify(allAlbumObserver, never()).onChanged(LoadingState())
             verify(allAlbumObserver, never()).onChanged(SuccessState(null))
             verify(allAlbumObserver, never()).onChanged(FailureState(throwable))
-            verify(allAlbumObserver).onChanged(NoInternetState())
+            verify(allAlbumObserver).onChanged(NoNetworkState())
         }
     }
 
@@ -97,7 +97,7 @@ class AlbumViewModelTest : BaseViewModelTest() {
 
             verify(allAlbumObserver).onChanged(LoadingState())
             verify(allAlbumObserver, never()).onChanged(SuccessState(successAllAlbumResponse.data))
-            verify(allAlbumObserver, never()).onChanged(NoInternetState())
+            verify(allAlbumObserver, never()).onChanged(NoNetworkState())
             verify(allAlbumObserver).onChanged(FailureState(throwable))
         }
     }

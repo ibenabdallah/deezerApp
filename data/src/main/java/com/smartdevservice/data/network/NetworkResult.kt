@@ -7,9 +7,10 @@ import com.smartdevservice.domain.Result
 import retrofit2.Response
 import java.io.IOException
 
-const val GENERAL_NETWORK_ERROR = "Something went wrong, please try again."
+const val GENERAL_NETWORK_ERROR_MSG = "Something went wrong, please try again."
+const val GENERAL_NETWORK_ERROR_CODE = 400
 
-val httpError = HttpError(Throwable(GENERAL_NETWORK_ERROR))
+val globalNetworkError = HttpError(Throwable(GENERAL_NETWORK_ERROR_MSG), GENERAL_NETWORK_ERROR_CODE)
 
 inline fun <T : Any> Response<T>.onSuccess(action: (T) -> Unit): Response<T> {
     if (isSuccessful) body()?.run(action)
@@ -28,8 +29,8 @@ fun <T : Any> Response<T>.getData(): Result<T> {
     try {
         onSuccess { return Success(it) }
         onFailure { return Failure(it) }
-        return Failure(httpError)
+        return Failure(globalNetworkError)
     } catch (e: IOException) {
-        return Failure(httpError)
+        return Failure(globalNetworkError)
     }
 }
