@@ -17,6 +17,10 @@ import com.smartdevservice.deezerapp.utils.Utils.KEY_ALBUM
 import com.smartdevservice.domain.model.Album
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import timber.log.Timber
+import androidx.recyclerview.widget.OrientationHelper
+import com.smartdevservice.deezerapp.ui.list.VarColumnGridLayoutManager.ColumnCountProvider
+import com.smartdevservice.deezerapp.ui.list.VarColumnGridLayoutManager.DefaultColumnCountProvider
+
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -63,8 +67,14 @@ class ListAlbumFragment : BaseFragment() {
         binding.srlList.setOnRefreshListener {
             albumViewModel.loadingAllAlbum()
         }
+
+        val carColumnGridLayoutManager = VarColumnGridLayoutManager(requireContext(), OrientationHelper.VERTICAL, false)
+        val columnProvider: ColumnCountProvider = DefaultColumnCountProvider(requireContext())
+        carColumnGridLayoutManager.setColumnCountProvider(columnProvider)
+
         binding.rvList.apply {
             adapter = albumAdapter
+            layoutManager = carColumnGridLayoutManager
         }
         albumViewModel.loadingAllAlbum()
     }

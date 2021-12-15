@@ -43,4 +43,9 @@ ext.versions = [
         koinTestVersion        : '2.2.2',
         coreTestVersion        : '2.1.0',
 
+        // android test
+        espressoCoreVersion    : '3.4.0',
+        testExtJunitVersion    : '1.1.3'
+
+
 ]

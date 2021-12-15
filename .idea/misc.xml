@@ -10,7 +10,7 @@
         <entry key="app/src/main/res/layout/fragment_details_album.xml" value="0.18795289855072464" />
         <entry key="app/src/main/res/layout/fragment_list_album.xml" value="0.19610507246376813" />
         <entry key="app/src/main/res/layout/item_album.xml" value="0.35520833333333335" />
-        <entry key="app/src/main/res/layout/item_track.xml" value="0.37604166666666666" />
+        <entry key="app/src/main/res/layout/item_track.xml" value="0.22" />
         <entry key="app/src/main/res/layout/view_dialog.xml" value="0.35520833333333335" />
       </map>
     </option>

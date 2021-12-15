@@ -55,4 +55,20 @@ object Utils {
     fun convertDpToPixel(dp: Int, context: Context): Int {
         return (dp * (getDensityDpiOfDevice(context) / DisplayMetrics.DENSITY_DEFAULT)).toInt()
     }
+
+    fun columnsForWidth(context: Context, widthPx: Int): Int {
+        val widthDp = dpFromPx(context, widthPx.toFloat())
+        return when {
+            widthDp >= 900 -> 4
+            widthDp >= 720 -> 4
+            widthDp >= 600 -> 3
+            widthDp >= 480 -> 2
+            widthDp >= 320 -> 2
+            else -> 2
+        }
+    }
+
+    private fun dpFromPx(context: Context, px: Float): Int {
+        return (px / context.resources.displayMetrics.density + 0.5f).toInt()
+    }
 }
