@@ -44,7 +44,6 @@ class ListAlbumFragment : BaseFragment() {
                     putParcelable(KEY_ALBUM, album)
                 })
             }
-
         })
     }
 

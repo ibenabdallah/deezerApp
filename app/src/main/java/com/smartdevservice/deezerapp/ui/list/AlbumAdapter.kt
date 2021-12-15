@@ -1,6 +1,7 @@
 package com.smartdevservice.deezerapp.ui.list
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -14,6 +15,9 @@ import com.smartdevservice.deezerapp.ui.ListListener
 import com.smartdevservice.deezerapp.utils.EnumDensity
 import com.smartdevservice.deezerapp.utils.Utils.convertDpToPixel
 import com.smartdevservice.domain.model.Album
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
+
 
 class AlbumAdapter(
     private var list: List<Album>,
