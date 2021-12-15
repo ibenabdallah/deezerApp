@@ -58,12 +58,17 @@ Glide       : https://bumptech.github.io/glide/
 
 
 # Quelques screenshots 
-
+## Day
 <p>
-<img src="/screenshots/screenshot_list_album.jpg" width="40%">
-<img src="/screenshots/screenshot_details_album.jpg" width="40%">
+<img src="/screenshots/album_list.jpg" width="40%">
+<img src="/screenshots/album_details.jpg" width="40%">
 </p>
 
+## Night
+<p>
+<img src="/screenshots/album_list_night.jpg" width="40%">
+<img src="/screenshots/album_details_night.jpg" width="40%">
+</p>
 
 
 # The MIT License
