@@ -3,9 +3,11 @@
     <string name="action_settings">Settings</string>
 
     <string name="album_cover">Couverture d\'album</string>
-    <string name="album_titre">Titre d\'album :</string>
-    <string name="album_date_realisation">Date réalisation :</string>
+    <string name="album_titre">Titre :</string>
+    <string name="album_date_realisation">Date :</string>
     <string name="album_artist">Artist :</string>
     <string name="album_available">Disponible :</string>
+    <string name="album_available_yes">Oui</string>
+    <string name="album_available_no">Non</string>
     <string name="album_nb_tracks">Nombre des pistes :</string>
 </resources>

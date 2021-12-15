@@ -1,3 +1,6 @@
 <resources>
     <dimen name="fab_margin">48dp</dimen>
+    <dimen name="margin_m">15dp</dimen>
+    <dimen name="margin_l">30dp</dimen>
+    <dimen name="margin_sl">45dp</dimen>
 </resources>

@@ -44,4 +44,31 @@ object Utils {
             }
         }
     }
+
+    /**
+     * This method converts dp unit to equivalent pixels, depending on device density.
+     *
+     * @param dp A value in dp (density independent pixels) unit. Which we need to convert into pixels
+     * @param context Context to get resources and device specific display metrics
+     * @return A float value to represent px equivalent to dp depending on device density
+     */
+    fun convertDpToPixel(dp: Int, context: Context): Int {
+        return (dp * (getDensityDpiOfDevice(context) / DisplayMetrics.DENSITY_DEFAULT)).toInt()
+    }
+
+    fun columnsForWidth(context: Context, widthPx: Int): Int {
+        val widthDp = dpFromPx(context, widthPx.toFloat())
+        return when {
+            widthDp >= 900 -> 4
+            widthDp >= 720 -> 4
+            widthDp >= 600 -> 3
+            widthDp >= 480 -> 2
+            widthDp >= 320 -> 2
+            else -> 2
+        }
+    }
+
+    private fun dpFromPx(context: Context, px: Float): Int {
+        return (px / context.resources.displayMetrics.density + 0.5f).toInt()
+    }
 }

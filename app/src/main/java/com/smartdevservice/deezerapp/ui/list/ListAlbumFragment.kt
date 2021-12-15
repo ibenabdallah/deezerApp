@@ -10,12 +10,17 @@ import com.smartdevservice.deezerapp.R
 import com.smartdevservice.deezerapp.base.*
 import com.smartdevservice.deezerapp.common.subscribe
 import com.smartdevservice.deezerapp.databinding.FragmentListAlbumBinding
+import com.smartdevservice.deezerapp.ui.AlbumViewModel
 import com.smartdevservice.deezerapp.ui.ListListener
 import com.smartdevservice.deezerapp.utils.Utils
 import com.smartdevservice.deezerapp.utils.Utils.KEY_ALBUM
 import com.smartdevservice.domain.model.Album
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import timber.log.Timber
+import androidx.recyclerview.widget.OrientationHelper
+import com.smartdevservice.deezerapp.ui.list.VarColumnGridLayoutManager.ColumnCountProvider
+import com.smartdevservice.deezerapp.ui.list.VarColumnGridLayoutManager.DefaultColumnCountProvider
+
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -23,7 +28,7 @@ import timber.log.Timber
 class ListAlbumFragment : BaseFragment() {
 
     private lateinit var _binding: FragmentListAlbumBinding
-    private val albumViewModel: AlbumViewModel by viewModel()
+    private val albumViewModel: AlbumViewModel by sharedViewModel()
     private lateinit var albumAdapter: AlbumAdapter
 
     // This property is only valid between onCreateView and
@@ -33,7 +38,7 @@ class ListAlbumFragment : BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        albumViewModel.viewState.subscribe(this, ::handleAllAlbumState)
+        albumViewModel.albumsState.subscribe(this, ::handleAllAlbumState)
 
         val enumDensity = Utils.getEnumDensityOfDevice(requireContext())
 
@@ -43,7 +48,6 @@ class ListAlbumFragment : BaseFragment() {
                     putParcelable(KEY_ALBUM, album)
                 })
             }
-
         })
     }
 
@@ -63,8 +67,14 @@ class ListAlbumFragment : BaseFragment() {
         binding.srlList.setOnRefreshListener {
             albumViewModel.loadingAllAlbum()
         }
+
+        val carColumnGridLayoutManager = VarColumnGridLayoutManager(requireContext(), OrientationHelper.VERTICAL, false)
+        val columnProvider: ColumnCountProvider = DefaultColumnCountProvider(requireContext())
+        carColumnGridLayoutManager.setColumnCountProvider(columnProvider)
+
         binding.rvList.apply {
             adapter = albumAdapter
+            layoutManager = carColumnGridLayoutManager
         }
         albumViewModel.loadingAllAlbum()
     }
@@ -72,12 +82,19 @@ class ListAlbumFragment : BaseFragment() {
     private fun handleAllAlbumState(state: ViewState<ArrayList<Album>>) {
         binding.srlList.isRefreshing = state is LoadingState
         when (state) {
-            is FailureState -> Timber.i("FailureState")
+            is FailureState -> {
+                Timber.i("FailureState")
+                //TODO on peut ajouter un traitement pour dit à l'utilisateur qu'il y'a un probeleme
+                // Comme affichage d'une Toast ou Snackbar par exemple...
+            }
             is LoadingState -> Timber.i("LoadingState")
-            is NoInternetState -> Timber.i("NoInternetState")
+            is NoNetworkState -> {
+                Timber.i("NoNetworkState")
+                //TODO on peut ajouter un traitement pour dit à l'utilisateur qu'il n'a pas de connexion
+                // Comme affichage d'une Toast ou Snackbar par exemple...
+            }
             is SuccessState -> {
-                Timber.i("SuccessState")
-                Timber.i("data = ${state.data}")
+                Timber.i("SuccessState, data size = ${state.data?.size}")
                 albumAdapter.setList(state.data?.toList() ?: arrayListOf())
             }
         }

@@ -4,12 +4,11 @@ import android.content.Context
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.nhaarman.mockitokotlin2.mock
 import com.smartdevservice.data.common.Connectivity
-import com.smartdevservice.data.common.ConnectivityImpl
 import com.smartdevservice.data.di.commonModule
 import com.smartdevservice.data.di.networkingModule
 import com.smartdevservice.data.di.repositoryModule
-import com.smartdevservice.data.repository.NETWORK_ERROR_MSG
 import com.smartdevservice.deezerapp.di.presentationModule
+import com.smartdevservice.domain.UtilsTest.FAKE_FAILURE_ERROR_MSG
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.After
 import org.junit.Before
@@ -29,8 +28,6 @@ import timber.log.Timber
 open class BaseViewModelTest : KoinTest {
 
     private val context = Mockito.mock(Context::class.java)
-    protected val connectivity: Connectivity = mock()
-    protected val throwable = Throwable(NETWORK_ERROR_MSG)
 
     @get:Rule
     val rule = InstantTaskExecutorRule()

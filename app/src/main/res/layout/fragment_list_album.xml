@@ -10,8 +10,6 @@
         android:id="@+id/srl_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_10"
-        android:layout_marginEnd="@dimen/margin_10"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,9 +19,8 @@
             android:id="@+id/rv_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="10dp"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:spanCount="2"
+            android:layout_margin="@dimen/margin_m"
+            android:layoutAnimation="@anim/layout_animation"
             tools:listitem="@layout/item_album" />
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
