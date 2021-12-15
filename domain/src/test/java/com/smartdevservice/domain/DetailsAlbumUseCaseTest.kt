@@ -3,51 +3,52 @@ package com.smartdevservice.domain
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
-import com.smartdevservice.domain.UtilsTest.errorAllAlbumResponse
+import com.smartdevservice.domain.UtilsTest.errorDetailsAlbumResponse
 import com.smartdevservice.domain.UtilsTest.fakeHttpError
-import com.smartdevservice.domain.UtilsTest.successAllAlbumResponse
-import com.smartdevservice.domain.model.AllAlbumResponse
+import com.smartdevservice.domain.UtilsTest.successDetailsAlbumResponse
+import com.smartdevservice.domain.UtilsTest.urlIdAlbum
+import com.smartdevservice.domain.model.DetailsAlbumResponse
 import com.smartdevservice.domain.repository.AlbumRepository
-import com.smartdevservice.domain.usecase.AllAlbumUseCaseImpl
+import com.smartdevservice.domain.usecase.DetailsAlbumUseCaseImpl
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.*
 import org.junit.Test
 
-class AllAlbumUseCaseTest {
+class DetailsAlbumUseCaseTest {
 
     private val albumRepository: AlbumRepository = mock()
 
-    private val allAlbumUseCase by lazy { AllAlbumUseCaseImpl(albumRepository) }
+    private val detailsAlbumUseCase by lazy { DetailsAlbumUseCaseImpl(albumRepository) }
 
     @Test
-    fun `test AllAlbumUseCase calls AlbumRepository`() {
+    fun `test detailsAlbumUseCase calls AlbumRepository`() {
         runBlocking {
-            allAlbumUseCase()
-            verify(albumRepository).loadingAllAlbum()
+            detailsAlbumUseCase(urlIdAlbum)
+            verify(albumRepository).loadingDetailsAlbum(urlIdAlbum)
         }
     }
 
     @Test
-    fun `test allAlbumUseCase success`() {
+    fun `test detailsAlbumUseCase success`() {
         runBlocking {
 
-            whenever(albumRepository.loadingAllAlbum()).thenReturn(Success(successAllAlbumResponse))
+            whenever(albumRepository.loadingDetailsAlbum(urlIdAlbum)).thenReturn(Success(successDetailsAlbumResponse))
 
-            var responseSuccess: AllAlbumResponse? = null
+            var responseSuccess: DetailsAlbumResponse? = null
             var responseFailure: HttpError? = null
             var responseNoNetwork: NoNetwork? = null
 
-            allAlbumUseCase()
+            detailsAlbumUseCase(urlIdAlbum)
                 .onSuccess { responseSuccess = it }
                 .onFailure { responseFailure = it }
                 .noNetwork { responseNoNetwork = NoNetwork }
 
             assertNotNull(responseSuccess)
-            assertEquals(responseSuccess, successAllAlbumResponse)
-            assertEquals(responseSuccess?.data, successAllAlbumResponse.data)
-            assertEquals(responseSuccess?.data?.size, successAllAlbumResponse.data?.size)
-            assertEquals(responseSuccess?.data?.get(0), successAllAlbumResponse.data?.get(0))
-            assertEquals(responseSuccess?.data?.get(0)?.artist, successAllAlbumResponse.data?.get(0)?.artist)
+            assertEquals(responseSuccess, successDetailsAlbumResponse)
+            assertEquals(responseSuccess?.data, successDetailsAlbumResponse.data)
+            assertEquals(responseSuccess?.data?.size, successDetailsAlbumResponse.data?.size)
+            assertEquals(responseSuccess?.data?.get(0), successDetailsAlbumResponse.data?.get(0))
+            assertEquals(responseSuccess?.data?.get(0)?.artist, successDetailsAlbumResponse.data?.get(0)?.artist)
 
             /* Failure */
             assertNull(responseFailure?.errorCode)
@@ -59,27 +60,27 @@ class AllAlbumUseCaseTest {
     }
 
     @Test
-    fun `test allAlbumUseCase error no data`() {
+    fun `test detailsAlbumUseCase error no data`() {
         runBlocking {
 
-            whenever(albumRepository.loadingAllAlbum()).thenReturn(Success(errorAllAlbumResponse))
+            whenever(albumRepository.loadingDetailsAlbum(urlIdAlbum)).thenReturn(Success(errorDetailsAlbumResponse))
 
-            var responseSuccess: AllAlbumResponse? = null
+            var responseSuccess: DetailsAlbumResponse? = null
             var responseFailure: HttpError? = null
             var responseNoNetwork: NoNetwork? = null
 
-            allAlbumUseCase()
+            detailsAlbumUseCase(urlIdAlbum)
                 .onSuccess { responseSuccess = it }
                 .onFailure { responseFailure = it }
                 .noNetwork { responseNoNetwork = NoNetwork }
 
             assertNotNull(responseSuccess)
-            assertEquals(responseSuccess, errorAllAlbumResponse)
+            assertEquals(responseSuccess, errorDetailsAlbumResponse)
             assertNull(responseSuccess?.data)
-            assertEquals(responseSuccess?.error, errorAllAlbumResponse.error)
-            assertEquals(responseSuccess?.error?.code, errorAllAlbumResponse.error?.code)
-            assertEquals(responseSuccess?.error?.message, errorAllAlbumResponse.error?.message)
-            assertEquals(responseSuccess?.error?.type, errorAllAlbumResponse.error?.type)
+            assertEquals(responseSuccess?.error, errorDetailsAlbumResponse.error)
+            assertEquals(responseSuccess?.error?.code, errorDetailsAlbumResponse.error?.code)
+            assertEquals(responseSuccess?.error?.message, errorDetailsAlbumResponse.error?.message)
+            assertEquals(responseSuccess?.error?.type, errorDetailsAlbumResponse.error?.type)
 
             /* Failure */
             assertNull(responseFailure?.errorCode)
@@ -91,16 +92,16 @@ class AllAlbumUseCaseTest {
     }
 
     @Test
-    fun `test allAlbumUseCase failure`() {
+    fun `test detailsAlbumUseCase failure`() {
         runBlocking {
 
-            whenever(albumRepository.loadingAllAlbum()).thenReturn(Failure(fakeHttpError))
+            whenever(albumRepository.loadingDetailsAlbum(urlIdAlbum)).thenReturn(Failure(fakeHttpError))
 
-            var responseSuccess: AllAlbumResponse? = null
+            var responseSuccess: DetailsAlbumResponse? = null
             var responseFailure: HttpError? = null
             var responseNoNetwork: NoNetwork? = null
 
-            allAlbumUseCase()
+            detailsAlbumUseCase(urlIdAlbum)
                 .onSuccess { responseSuccess = it }
                 .onFailure { responseFailure = it }
                 .noNetwork { responseNoNetwork = NoNetwork }
@@ -120,16 +121,16 @@ class AllAlbumUseCaseTest {
     }
 
     @Test
-    fun `test allAlbumUseCase no network`() {
+    fun `test detailsAlbumUseCase no network`() {
         runBlocking {
 
-            whenever(albumRepository.loadingAllAlbum()).thenReturn(NoNetwork)
+            whenever(albumRepository.loadingDetailsAlbum(urlIdAlbum)).thenReturn(NoNetwork)
 
-            var responseSuccess: AllAlbumResponse? = null
+            var responseSuccess: DetailsAlbumResponse? = null
             var responseFailure: HttpError? = null
             var responseNoNetwork: NoNetwork? = null
-
-            allAlbumUseCase()
+            
+            detailsAlbumUseCase(urlIdAlbum)
                 .onSuccess { responseSuccess = it }
                 .onFailure { responseFailure = it }
                 .noNetwork { responseNoNetwork = NoNetwork }
@@ -138,9 +139,10 @@ class AllAlbumUseCaseTest {
 
             /* Failure */
             assertNull(responseFailure)
-
+            
             /* No Network */
             assertNotNull(responseNoNetwork)
         }
     }
+
 }

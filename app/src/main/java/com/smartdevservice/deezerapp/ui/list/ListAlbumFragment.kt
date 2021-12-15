@@ -10,11 +10,12 @@ import com.smartdevservice.deezerapp.R
 import com.smartdevservice.deezerapp.base.*
 import com.smartdevservice.deezerapp.common.subscribe
 import com.smartdevservice.deezerapp.databinding.FragmentListAlbumBinding
+import com.smartdevservice.deezerapp.ui.AlbumViewModel
 import com.smartdevservice.deezerapp.ui.ListListener
 import com.smartdevservice.deezerapp.utils.Utils
 import com.smartdevservice.deezerapp.utils.Utils.KEY_ALBUM
 import com.smartdevservice.domain.model.Album
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import timber.log.Timber
 
 /**
@@ -23,7 +24,7 @@ import timber.log.Timber
 class ListAlbumFragment : BaseFragment() {
 
     private lateinit var _binding: FragmentListAlbumBinding
-    private val albumViewModel: AlbumViewModel by viewModel()
+    private val albumViewModel: AlbumViewModel by sharedViewModel()
     private lateinit var albumAdapter: AlbumAdapter
 
     // This property is only valid between onCreateView and
@@ -33,7 +34,7 @@ class ListAlbumFragment : BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        albumViewModel.viewState.subscribe(this, ::handleAllAlbumState)
+        albumViewModel.albumsState.subscribe(this, ::handleAllAlbumState)
 
         val enumDensity = Utils.getEnumDensityOfDevice(requireContext())
 

@@ -10,6 +10,6 @@ import org.koin.dsl.module
 val commonModule = module {
 
     single { CoroutineContextProvider() }
-    single <Connectivity> { ConnectivityImpl(get()) }
+    factory<Connectivity> { ConnectivityImpl(get()) }
 
 }

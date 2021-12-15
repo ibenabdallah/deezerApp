@@ -100,4 +100,31 @@ class UtilsTest {
 
         assertEquals(Utils.getEnumDensityOfDevice(mockContext), EnumDensity.DENSITY_XXXHDPI)
     }
+
+    @Test
+    fun `test convertDpToPixel dp = 10 pour densityDpi = 240`() {
+        displayMetrics.densityDpi = 240
+        `when`(mockResources.displayMetrics).thenReturn(displayMetrics)
+        `when`(mockContext.resources).thenReturn(mockResources)
+
+        assertEquals(Utils.convertDpToPixel(10, mockContext), 10)
+    }
+
+    @Test
+    fun `test convertDpToPixel dp = 10 pour densityDpi = 320`() {
+        displayMetrics.densityDpi = 320
+        `when`(mockResources.displayMetrics).thenReturn(displayMetrics)
+        `when`(mockContext.resources).thenReturn(mockResources)
+
+        assertEquals(Utils.convertDpToPixel(10, mockContext), 20)
+    }
+
+    @Test
+    fun `test convertDpToPixel dp = 10 pour densityDpi = 480`() {
+        displayMetrics.densityDpi = 480
+        `when`(mockResources.displayMetrics).thenReturn(displayMetrics)
+        `when`(mockContext.resources).thenReturn(mockResources)
+
+        assertEquals(Utils.convertDpToPixel(10, mockContext), 30)
+    }
 }

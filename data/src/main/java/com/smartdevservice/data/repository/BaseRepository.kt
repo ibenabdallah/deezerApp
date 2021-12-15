@@ -7,9 +7,7 @@ import kotlinx.coroutines.withContext
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-open class BaseRepository() : KoinComponent {
-
-    val connectivity: Connectivity by inject()
+open class BaseRepository(val connectivity: Connectivity) : KoinComponent {
 
     val contextProvider: CoroutineContextProvider by inject()
     /**

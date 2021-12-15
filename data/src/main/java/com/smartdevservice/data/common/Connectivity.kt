@@ -1,7 +1,5 @@
 package com.smartdevservice.data.common
 
-import android.net.NetworkCapabilities
-
 interface Connectivity {
 
     fun hasNetworkAccess(): Boolean
