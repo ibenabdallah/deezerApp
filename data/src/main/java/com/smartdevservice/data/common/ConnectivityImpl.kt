@@ -3,7 +3,6 @@ package com.smartdevservice.data.common
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
-import android.net.NetworkInfo
 import android.os.Build
 
 class ConnectivityImpl(context: Context) : Connectivity {
@@ -16,39 +15,29 @@ class ConnectivityImpl(context: Context) : Connectivity {
     }
 
     override fun isWifi(): Boolean {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)?.run {
-                    return hasTransport(NetworkCapabilities.TRANSPORT_WIFI)
-                }
-            } else {
-                connectivityManager.activeNetworkInfo?.run {
-                    return type == ConnectivityManager.TYPE_WIFI
-                }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)?.run {
+                return hasTransport(NetworkCapabilities.TRANSPORT_WIFI)
             }
         } else {
-            val activeNetwork: NetworkInfo? = connectivityManager.activeNetworkInfo
-            return activeNetwork?.isConnected == true && activeNetwork.type == ConnectivityManager.TYPE_WIFI
+            connectivityManager.activeNetworkInfo?.run {
+                return type == ConnectivityManager.TYPE_WIFI
+            }
         }
         return false
     }
 
     override fun isMobile(): Boolean {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)?.run {
-                    return hasTransport(
-                        NetworkCapabilities.TRANSPORT_CELLULAR
-                    )
-                }
-            } else {
-                connectivityManager.activeNetworkInfo?.run {
-                    return type == ConnectivityManager.TYPE_MOBILE
-                }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)?.run {
+                return hasTransport(
+                    NetworkCapabilities.TRANSPORT_CELLULAR
+                )
             }
         } else {
-            val activeNetwork: NetworkInfo? = connectivityManager.activeNetworkInfo
-            return activeNetwork?.isConnected == true && activeNetwork.type == ConnectivityManager.TYPE_MOBILE
+            connectivityManager.activeNetworkInfo?.run {
+                return type == ConnectivityManager.TYPE_MOBILE
+            }
         }
         return false
     }

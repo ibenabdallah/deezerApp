@@ -1,7 +1,7 @@
 ext.versions = [
 
         // Application
-        minSdk                 : 20, // Minimum Android 4.4
+        minSdk                 : 21, // Minimum Android 4.4
         compileSdk             : 31,
         targetSdk              : 31,
         versionCode            : 1,
