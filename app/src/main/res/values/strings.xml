@@ -10,4 +10,12 @@
     <string name="album_available_yes">Oui</string>
     <string name="album_available_no">Non</string>
     <string name="album_nb_tracks">Nombre des pistes :</string>
+
+    <string name="album_sort">Album sort</string>
+    <string name="album_sort_par_default">Par default</string>
+    <string name="album_sort_par_titre">Par titre</string>
+    <string name="album_sort_par_nom_artist">Par nom Artist</string>
+    <string name="album_sort_par_date">Par date</string>
+    <string name="album_sort_nb_tracks">Par nb tracks</string>
+    <string name="album_search">Recherche …</string>
 </resources>
