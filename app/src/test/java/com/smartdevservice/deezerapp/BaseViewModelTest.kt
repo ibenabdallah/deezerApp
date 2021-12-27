@@ -43,7 +43,7 @@ open class BaseViewModelTest : KoinTest {
         }
     }
     @Test
-    public fun test0(){
+    fun test0(){
         Timber.d("test ...")
     }
 

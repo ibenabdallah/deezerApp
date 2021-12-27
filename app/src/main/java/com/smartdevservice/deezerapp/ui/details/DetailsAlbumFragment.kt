@@ -73,7 +73,7 @@ class DetailsAlbumFragment : BaseFragment() {
             .placeholder(R.drawable.ic_launcher_background)
             .into(binding.ivCover)
 
-        binding.rvTracks.apply {
+        binding.rvList.apply {
             adapter = tracksAdapter
         }
 
@@ -114,7 +114,4 @@ class DetailsAlbumFragment : BaseFragment() {
         }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-    }
 }

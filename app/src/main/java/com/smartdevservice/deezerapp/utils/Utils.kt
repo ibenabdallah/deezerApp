@@ -10,7 +10,7 @@ object Utils {
     const val KEY_ALBUM = "KEY_ALBUM"
 
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
-    public fun getDensityDpiOfDevice(context: Context): Int {
+    fun getDensityDpiOfDevice(context: Context): Int {
         val displayMetrics = context.resources.displayMetrics
         return displayMetrics.densityDpi
     }

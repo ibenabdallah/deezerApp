@@ -12,6 +12,8 @@
         <entry key="app/src/main/res/layout/item_album.xml" value="0.35520833333333335" />
         <entry key="app/src/main/res/layout/item_track.xml" value="0.22" />
         <entry key="app/src/main/res/layout/view_dialog.xml" value="0.35520833333333335" />
+        <entry key="app/src/main/res/layout/view_search_sort.xml" value="0.18157894736842106" />
+        <entry key="app/src/main/res/menu/menu_main.xml" value="0.15526315789473685" />
       </map>
     </option>
   </component>

@@ -71,4 +71,6 @@ dependencies {
 
     androidTestImplementation "androidx.test.ext:junit:$versions.testExtJunitVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$versions.espressoCoreVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-intents:$versions.espressoCoreVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-contrib:$versions.espressoCoreVersion"
 }
